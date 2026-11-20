@@ -3,11 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#173A2C" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="icon-192.png" />
   <title>Panchakarma Pro &amp; Keraleeya Upakarma Guide</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
@@ -128,6 +123,9 @@
       }
     }
   </style>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#143D2D">
+  <link rel="apple-touch-icon" href="./icon-192.png">
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-forest-100 selection:text-forest-900">
 
@@ -165,6 +163,9 @@
           <button type="button" data-tab="yoga" class="tab-btn px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-forest-50 flex items-center gap-1.5 whitespace-nowrap">
             <i data-lucide="heart-pulse" class="w-3.5 h-3.5"></i> Yoga &amp; Recovery
           </button>
+          <button type="button" data-tab="copilot" class="tab-btn px-3 py-2 rounded-lg text-xs font-bold text-forest-800 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="bot" class="w-3.5 h-3.5 text-forest-700"></i> AI Copilot
+          </button>
           <button type="button" data-open-consult="true" class="ml-1 px-3 py-2 rounded-lg text-xs font-bold bg-turmeric-600 hover:bg-turmeric-700 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap transition">
             <i data-lucide="mail" class="w-3.5 h-3.5"></i> Consult
           </button>
@@ -196,6 +197,9 @@
           </button>
           <button type="button" data-tab="yoga" class="tab-btn px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-forest-50 flex items-center gap-1.5">
             <i data-lucide="heart-pulse" class="w-3.5 h-3.5"></i> Yoga &amp; Recovery
+          </button>
+          <button type="button" data-tab="copilot" class="tab-btn col-span-2 sm:col-span-3 px-3 py-2 rounded-lg text-xs font-bold text-forest-900 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 flex items-center justify-center gap-1.5">
+            <i data-lucide="bot" class="w-3.5 h-3.5 text-forest-700"></i> Offline AI Clinical Copilot
           </button>
           <button type="button" data-open-consult="true" class="col-span-2 sm:col-span-3 px-3 py-2 rounded-lg text-xs font-bold bg-turmeric-600 hover:bg-turmeric-700 text-white flex items-center justify-center gap-1.5">
             <i data-lucide="mail" class="w-3.5 h-3.5"></i> Contact &amp; Consult (dr.lateefpapa@gmail.com)
@@ -236,6 +240,10 @@
           <button type="button" id="coverPottaliSopBtn"
             class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/25 backdrop-blur-sm text-xs font-semibold transition flex items-center gap-1.5">
             <i data-lucide="package-check" class="w-4 h-4 text-amber-200"></i> Kerala Pottali SOPs
+          </button>
+          <button type="button" id="coverCopilotBtn"
+            class="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-forest-950 font-bold text-xs shadow-md transition flex items-center gap-1.5">
+            <i data-lucide="bot" class="w-4 h-4"></i> Ask AI Copilot (Offline)
           </button>
           <button type="button" data-open-consult="true"
             class="px-4 py-2.5 rounded-xl bg-forest-800/80 hover:bg-forest-700 text-amber-100 border border-amber-300/35 backdrop-blur-sm text-xs font-semibold transition flex items-center gap-1.5">
@@ -1144,7 +1152,175 @@
       </div>
     </section>
 
+
+    <!-- ==================== TAB 7: OFFLINE AI CLINICAL COPILOT ==================== -->
+    <section id="view-copilot" class="tab-view hidden space-y-5">
+      <!-- Copilot Masthead -->
+      <div class="rounded-2xl bg-gradient-to-br from-forest-900 via-forest-800 to-[#143d2d] text-white p-5 sm:p-6 border border-forest-700 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-400/15 border border-amber-300/35 text-amber-200 text-[10px] font-bold uppercase tracking-wider">
+              <i data-lucide="cpu" class="w-3 h-3"></i> 100% Offline &bull; Zero API Key &bull; Grounded in App SOPs
+            </div>
+            <h2 class="font-display text-2xl sm:text-3xl font-bold mt-2 leading-tight">Panchakarma Pro AI Clinical Copilot</h2>
+            <p class="text-xs sm:text-sm text-emerald-100/90 mt-1 max-w-2xl">
+              Ask clinical questions in English or Hinglish across all 15 Kerala Upakarma protocols, 6 Pottali SOPs, 20-therapy Safety Matrix, Snehapana dosages, Vyapad &amp; Lakshana — or build a safety-screened draft protocol in seconds.
+            </p>
+          </div>
+          <!-- Mode Toggle -->
+          <div class="inline-flex p-1 rounded-xl bg-black/25 border border-white/15 shrink-0 self-start sm:self-center">
+            <button type="button" id="copilotModeChatBtn" class="px-3.5 py-2 rounded-lg text-xs font-bold bg-amber-400 text-forest-950 shadow-sm transition flex items-center gap-1.5">
+              <i data-lucide="message-square" class="w-3.5 h-3.5"></i> Clinical Q&amp;A
+            </button>
+            <button type="button" id="copilotModeIntakeBtn" class="px-3.5 py-2 rounded-lg text-xs font-bold text-emerald-100 hover:text-white transition flex items-center gap-1.5">
+              <i data-lucide="clipboard-check" class="w-3.5 h-3.5"></i> Case Builder
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE 1: CLINICAL Q&A CHAT -->
+      <div id="copilotChatPanel" class="space-y-4">
+        <!-- Quick Tap Prompts -->
+        <div class="bg-white rounded-2xl border border-sand p-4 shadow-sm">
+          <div class="flex items-center justify-between gap-2 mb-2.5">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-forest-800 flex items-center gap-1.5">
+              <i data-lucide="zap" class="w-3.5 h-3.5 text-turmeric-600"></i> One-Tap Clinical Queries
+            </span>
+            <button type="button" id="copilotClearChatBtn" class="text-[11px] font-semibold text-slate-500 hover:text-forest-800 underline">
+              Clear Chat
+            </button>
+          </div>
+          <div id="copilotQuickChips" class="flex flex-wrap gap-1.5">
+            <button type="button" data-copilot-q="Best Kizhi for Kapha-Vata knee osteoarthritis?" class="px-2.5 py-1.5 rounded-lg bg-parchment hover:bg-forest-50 border border-sand text-[11px] font-semibold text-forest-900 transition">Best Kizhi for knee pain?</button>
+            <button type="button" data-copilot-q="How to prepare Elakizhi Patra Pinda Pottali?" class="px-2.5 py-1.5 rounded-lg bg-parchment hover:bg-forest-50 border border-sand text-[11px] font-semibold text-forest-900 transition">Elakizhi Pottali SOP</button>
+            <button type="button" data-copilot-q="Patient has Ayoga during Virechana what to do?" class="px-2.5 py-1.5 rounded-lg bg-parchment hover:bg-forest-50 border border-sand text-[11px] font-semibold text-forest-900 transition">Virechana Ayoga signs</button>
+            <button type="button" data-copilot-q="Is Vamana safe in pregnancy or hypertension?" class="px-2.5 py-1.5 rounded-lg bg-parchment hover:bg-forest-50 border border-sand text-[11px] font-semibold text-forest-900 transition">Pregnancy / HTN safety</button>
+            <button type="button" data-copilot-q="Snehapana starting dose for Krura Koshtha?" class="px-2.5 py-1.5 rounded-lg bg-parchment hover:bg-forest-50 border border-sand text-[11px] font-semibold text-forest-900 transition">Krura Koshtha Snehapana</button>
+            <button type="button" data-copilot-q="Netra Tarpana indications and duration?" class="px-2.5 py-1.5 rounded-lg bg-parchment hover:bg-forest-50 border border-sand text-[11px] font-semibold text-forest-900 transition">Netra Tarpana guide</button>
+            <button type="button" data-copilot-q="Dhanyamla Dhara vs Takradhara difference?" class="px-2.5 py-1.5 rounded-lg bg-parchment hover:bg-forest-50 border border-sand text-[11px] font-semibold text-forest-900 transition">Dhanyamla vs Takradhara</button>
+            <button type="button" data-copilot-q="Samsarjana diet after Madhyama Shuddhi?" class="px-2.5 py-1.5 rounded-lg bg-parchment hover:bg-forest-50 border border-sand text-[11px] font-semibold text-forest-900 transition">Samsarjana Krama</button>
+          </div>
+        </div>
+
+        <!-- Chat Thread -->
+        <div class="bg-white rounded-2xl border border-sand shadow-sm overflow-hidden flex flex-col">
+          <div id="copilotMessages" class="p-4 sm:p-5 space-y-4 max-h-[520px] overflow-y-auto bg-[#FCFBF8]">
+            <!-- Initial Welcome Message rendered by JS -->
+          </div>
+          <!-- Input Bar -->
+          <form id="copilotChatForm" class="p-3 sm:p-4 bg-white border-t border-sand flex items-center gap-2">
+            <input type="text" id="copilotInput" autocomplete="off"
+              placeholder="Ask about any therapy, Kizhi prep, dose, symptom, or contraindication..."
+              class="flex-1 px-3.5 py-2.5 rounded-xl bg-parchment border border-sand text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-forest-600" />
+            <button type="submit"
+              class="px-4 py-2.5 rounded-xl bg-forest-700 hover:bg-forest-800 text-white text-xs sm:text-sm font-bold shadow-sm transition flex items-center gap-1.5 shrink-0">
+              <i data-lucide="send" class="w-4 h-4"></i> Ask
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- MODE 2: SMART CASE INTAKE & PROTOCOL BUILDER -->
+      <div id="copilotIntakePanel" class="hidden space-y-5">
+        <div class="bg-white rounded-2xl border border-sand p-4 sm:p-6 shadow-sm space-y-5">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <h3 class="font-display text-xl font-bold text-forest-900">Smart Case Intake &amp; Safety-Screened Protocol Builder</h3>
+              <p class="text-xs text-slate-600 mt-0.5">Tap patient parameters below — the offline copilot cross-checks all 20 safety rules and builds a tailored draft plan.</p>
+            </div>
+            <button type="button" id="intakeResetBtn" class="text-xs font-semibold text-slate-500 hover:text-forest-800 underline">Reset Intake</button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Dosha -->
+            <div class="p-3.5 rounded-xl bg-parchment/70 border border-sand space-y-2">
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-forest-800">1. Dominant Dosha</label>
+              <select id="intakeDosha" class="w-full px-3 py-2 rounded-lg bg-white border border-sand text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-forest-600">
+                <option value="vata">Vata (Pain, stiffness, dryness, neuralgia)</option>
+                <option value="pitta">Pitta (Heat, inflammation, skin, acidity)</option>
+                <option value="kapha">Kapha (Heaviness, congestion, obesity, Ama)</option>
+                <option value="vatakapha">Vata-Kapha (OA knee, frozen shoulder, sciatica)</option>
+                <option value="tridosha">Tridosha / Rasayana (Stress, rejuvenation)</option>
+              </select>
+            </div>
+
+            <!-- Agni -->
+            <div class="p-3.5 rounded-xl bg-parchment/70 border border-sand space-y-2">
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-forest-800">2. Agni (Digestive Fire)</label>
+              <select id="intakeAgni" class="w-full px-3 py-2 rounded-lg bg-white border border-sand text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-forest-600">
+                <option value="manda">Manda Agni (Sluggish / Ama present)</option>
+                <option value="vishama">Vishama Agni (Irregular / bloating)</option>
+                <option value="tikshna">Tikshna Agni (Sharp / hyperacidity)</option>
+                <option value="sama">Sama Agni (Balanced)</option>
+              </select>
+            </div>
+
+            <!-- Koshtha -->
+            <div class="p-3.5 rounded-xl bg-parchment/70 border border-sand space-y-2">
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-forest-800">3. Koshtha (Bowel Nature)</label>
+              <select id="intakeKoshtha" class="w-full px-3 py-2 rounded-lg bg-white border border-sand text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-forest-600">
+                <option value="mridu">Mridu (Soft / loose stools)</option>
+                <option value="madhyama" selected>Madhyama (Moderate / normal)</option>
+                <option value="krura">Krura (Hard / constipated)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Clinical Focus Chips -->
+          <div class="space-y-2">
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-forest-800">4. Primary Clinical Focus (Select one or more)</label>
+            <div id="intakeFocusChips" class="flex flex-wrap gap-2">
+              <button type="button" data-focus="joints" class="intake-focus-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-parchment border border-sand text-slate-700 hover:bg-forest-50 transition">Joint / Spine Pain</button>
+              <button type="button" data-focus="stress" class="intake-focus-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-parchment border border-sand text-slate-700 hover:bg-forest-50 transition">Stress / Insomnia</button>
+              <button type="button" data-focus="skin" class="intake-focus-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-parchment border border-sand text-slate-700 hover:bg-forest-50 transition">Skin / Psoriasis</button>
+              <button type="button" data-focus="ent" class="intake-focus-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-parchment border border-sand text-slate-700 hover:bg-forest-50 transition">Sinus / Migraine / ENT</button>
+              <button type="button" data-focus="eye" class="intake-focus-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-parchment border border-sand text-slate-700 hover:bg-forest-50 transition">Eye Strain / Dry Eyes</button>
+              <button type="button" data-focus="metabolic" class="intake-focus-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-parchment border border-sand text-slate-700 hover:bg-forest-50 transition">Metabolic / Weight / Ama</button>
+              <button type="button" data-focus="rejuv" class="intake-focus-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-parchment border border-sand text-slate-700 hover:bg-forest-50 transition">Rejuvenation / Debility Recovery</button>
+            </div>
+          </div>
+
+          <!-- Red Flag Safety Checkboxes (populated live from RISK_FACTORS) -->
+          <div class="space-y-2">
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-rose-800 flex items-center gap-1.5">
+              <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-rose-600"></i> 5. Red-Flag Safety Screen (Auto-blocks unsafe therapies)
+            </label>
+            <div id="intakeRiskGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2"></div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            <button type="button" id="generateCasePlanBtn"
+              class="px-5 py-2.5 rounded-xl bg-forest-700 hover:bg-forest-800 text-white text-xs sm:text-sm font-bold shadow-sm transition flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i> Generate Clinical Plan
+            </button>
+            <span class="text-[11px] text-slate-500">Runs 100% locally on your device. No patient data leaves your phone.</span>
+          </div>
+        </div>
+
+        <!-- Generated Plan Output -->
+        <div id="intakeResultCard" class="hidden bg-white rounded-2xl border-2 border-forest-200 p-5 sm:p-6 shadow-sm space-y-4"></div>
+      </div>
+
+      <!-- Clinical Reference Disclaimer -->
+      <div class="rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 text-[11px] text-amber-950 flex items-start gap-2.5">
+        <i data-lucide="info" class="w-4 h-4 text-amber-700 shrink-0 mt-0.5"></i>
+        <div>
+          <strong>Clinical Decision Support Only:</strong> This offline AI Copilot synthesizes classical protocols and safety rules stored inside Panchakarma Pro. Final therapy selection, dosing, and Vyapad management must be supervised by a qualified Ayurvedic physician. For direct consultation, email <a href="mailto:dr.lateefpapa@gmail.com?subject=Panchakarma%20Pro%20Clinical%20Consult" class="underline font-bold">dr.lateefpapa@gmail.com</a>.
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <!-- Floating AI Copilot Quick-Launch Button -->
+  <button type="button" id="floatingCopilotBtn"
+    class="fixed bottom-5 right-5 z-40 print:hidden px-4 py-3 rounded-full bg-gradient-to-r from-forest-800 to-forest-700 hover:from-forest-900 hover:to-forest-800 text-amber-200 border border-amber-300/50 shadow-lg hover:shadow-xl transition flex items-center gap-2 text-xs font-bold"
+    aria-label="Open Offline AI Clinical Copilot">
+    <i data-lucide="bot" class="w-4 h-4 text-amber-300"></i>
+    <span>AI Copilot</span>
+  </button>
+
 
   <!-- Clinical Disclaimer & Sources Footer -->
   <footer class="bg-white border-t border-sand mt-10">
@@ -1266,15 +1442,15 @@
   <script>
     // ==================== GROUNDED CLINICAL DATASET ====================
     const IMG_ASSETS = {
-      purva: "./img_03.jpg",
-      dhara: "./img_04.jpg",
-      kizhi: "./img_05.jpg",
-      local: "./img_06.jpg",
+      purva: "./img_04.jpg",
+      dhara: "./img_05.jpg",
+      kizhi: "./img_03.jpg",
+      local: "./img_08.jpg",
       churna: "./img_07.jpg",
-      oils: "./img_08.jpg",
-      peya: "./img_09.jpg",
-      yusha: "./img_10.jpg",
-      bandhana: "./img_11.jpg",
+      oils: "./img_11.jpg",
+      peya: "./img_10.jpg",
+      yusha: "./img_06.jpg",
+      bandhana: "./img_09.jpg",
       yoga: "./img_02.jpg"
     };
 
@@ -3212,7 +3388,11 @@
       } else if (tabId === 'yoga') {
         state.yogaReaderOpen = false;
         renderYogaView();
+      } else if (tabId === 'copilot') {
+        renderCopilotView();
       }
+      const fab = document.getElementById('floatingCopilotBtn');
+      if (fab) fab.classList.toggle('hidden', tabId === 'copilot');
     }
     const YOGA_DATA = {
       purva: {
@@ -4144,6 +4324,625 @@
         });
       });
 
+
+      // ==================== OFFLINE AI CLINICAL COPILOT ENGINE ====================
+      let copilotInitialized = false;
+      const copilotSelectedFocus = new Set(['joints']);
+      const copilotSelectedRisks = new Set();
+
+      const COPILOT_SYNONYMS = {
+        knee: ['knee', 'osteoarthritis', 'sandhivata', 'joint', 'joints', 'arthritis', 'ghutna', 'ghutne', 'dard', 'pain', 'elakizhi', 'janu'],
+        back: ['back', 'spine', 'sciatica', 'lumbar', 'kamar', 'kati', 'disc', 'stiffness', 'elakizhi', 'pizhichil', 'basti'],
+        shoulder: ['shoulder', 'frozen', 'apabahuka', 'naranga', 'jambeera', 'elakizhi', 'podikizhi'],
+        stress: ['stress', 'anxiety', 'insomnia', 'sleep', 'neend', 'migraine', 'headache', 'sirdard', 'shirodhara', 'takradhara', 'mental'],
+        skin: ['skin', 'psoriasis', 'eczema', 'itching', 'takradhara', 'virechana', 'raktamokshana', 'pitta'],
+        eye: ['eye', 'eyes', 'aankh', 'dry', 'vision', 'strain', 'netra', 'akshi', 'tarpana'],
+        sinus: ['sinus', 'sinusitis', 'ent', 'nasal', 'migraine', 'nasya', 'head', 'throat'],
+        weight: ['weight', 'obesity', 'meda', 'kapha', 'ama', 'udwartana', 'podikizhi', 'dhanyamla', 'kaadi'],
+        pregnancy: ['pregnancy', 'pregnant', 'garbhini', 'garbhavastha', 'trimester'],
+        hypertension: ['hypertension', 'bp', 'blood pressure', 'cardiac', 'heart'],
+        fever: ['fever', 'bukhar', 'jwara', 'infection', 'acute'],
+        bleeding: ['bleeding', 'hemorrhage', 'ulcer', 'raktapitta'],
+        anaemia: ['anaemia', 'anemia', 'hb', 'pandu', 'weakness', 'debility'],
+        pottali: ['pottali', 'kizhi', 'bolus', 'cloth', 'prepare', 'preparation', 'sop', 'fry', 'tie', 'elakizhi', 'podikizhi', 'navarakizhi', 'mutta', 'kaadi', 'naranga', 'jambeera'],
+        snehapana: ['snehapana', 'ghee', 'ghrita', 'oleation', 'koshtha', 'mridu', 'madhyama', 'krura', 'snigdha', 'dose', 'dosage'],
+        samsarjana: ['samsarjana', 'diet', 'peya', 'vilepi', 'yusha', 'mamsarasa', 'shuddhi', 'pravara', 'avara', 'food', 'khana'],
+        lakshana: ['samyak', 'ayoga', 'atiyoga', 'lakshana', 'over', 'under', 'insufficient', 'excessive', 'sign', 'signs'],
+        vyapad: ['vyapad', 'complication', 'emergency', 'adhmana', 'parikartika', 'jeevadana', 'vomiting', 'fainting'],
+        yoga: ['yoga', 'pranayama', 'asana', 'exercise', 'recovery', 'rest', 'parihara']
+      };
+
+      function escHtml(s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      function tokenizeQuery(q) {
+        const clean = q.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ');
+        const words = clean.split(/\s+/).filter(w => w.length > 1);
+        const expanded = new Set(words);
+        Object.values(COPILOT_SYNONYMS).forEach(group => {
+          if (words.some(w => group.includes(w))) {
+            group.forEach(t => expanded.add(t));
+          }
+        });
+        return { raw: clean, words, expanded: Array.from(expanded) };
+      }
+
+      function scoreText(text, tokens) {
+        const hay = String(text || '').toLowerCase();
+        let score = 0;
+        tokens.words.forEach(w => {
+          if (w.length < 3) return;
+          if (hay.includes(w)) score += 6;
+        });
+        tokens.expanded.forEach(w => {
+          if (w.length < 3) return;
+          if (hay.includes(w)) score += 2;
+        });
+        return score;
+      }
+
+      function runOfflineCopilotQuery(query) {
+        const tokens = tokenizeQuery(query);
+        const qLower = tokens.raw;
+        const blocks = [];
+        const actions = [];
+        let safetyBanner = null;
+
+        // 1. Check if query mentions any red-flag risk factor
+        const matchedRisks = RISK_FACTORS.filter(rf => {
+          const idMatch = qLower.includes(rf.id);
+          const lblMatch = scoreText(rf.label + ' ' + rf.tag, tokens) >= 6;
+          if (rf.id === 'cardiac' && (qLower.includes('hypertension') || qLower.includes('bp') || qLower.includes('heart'))) return true;
+          if (rf.id === 'pregnancy' && (qLower.includes('pregnan') || qLower.includes('garbh'))) return true;
+          if (rf.id === 'fever' && (qLower.includes('fever') || qLower.includes('bukhar') || qLower.includes('jwara'))) return true;
+          return idMatch || lblMatch;
+        });
+
+        if (matchedRisks.length > 0) {
+          const riskIds = matchedRisks.map(r => r.id);
+          const blocked = SAFETY_THERAPIES.filter(t => t.contra.some(c => riskIds.includes(c)));
+          const safeOnes = SAFETY_THERAPIES.filter(t => !t.contra.some(c => riskIds.includes(c)) && !t.caution.some(c => riskIds.includes(c)));
+          safetyBanner = {
+            risks: matchedRisks.map(r => r.label),
+            blocked: blocked.slice(0, 8).map(t => t.name),
+            safe: safeOnes.slice(0, 6).map(t => t.name)
+          };
+          actions.push({ label: 'Open 20-Therapy Safety Matrix', type: 'safety', arg: 'matrix' });
+        }
+
+        // 2. Check Samyak / Ayoga / Atiyoga Lakshana intent
+        if (/(samyak|ayoga|atiyoga|lakshana|under-purg|over-purg|insufficient|excessive)/.test(qLower)) {
+          const procKeys = Object.keys(LAKSHANA_DATA);
+          let targetKey = procKeys.find(k => qLower.includes(k)) || 'virechana';
+          const ld = LAKSHANA_DATA[targetKey];
+          const wantsAyoga = qLower.includes('ayoga') || qLower.includes('insufficient') || qLower.includes('under');
+          const wantsAtiyoga = qLower.includes('atiyoga') || qLower.includes('excessive') || qLower.includes('over');
+          const items = wantsAyoga ? ld.ayoga : (wantsAtiyoga ? ld.atiyoga : ld.samyak);
+          const subLabel = wantsAyoga ? 'Ayoga (Insufficient)' : (wantsAtiyoga ? 'Atiyoga (Excessive)' : 'Samyak Yoga (Ideal Endpoints)');
+          blocks.push({
+            title: `${ld.label} — ${subLabel}`,
+            badge: 'Lakshana Quick-Check',
+            points: items,
+            note: ld.action || ''
+          });
+          actions.push({ label: 'Open Lakshana Module', type: 'safety', arg: 'lakshana' });
+        }
+
+        // 3. Check Pottali Preparation SOP intent
+        if (/(pottali|kizhi|bolus|prepare|preparation|tie|cloth|fry)/.test(qLower)) {
+          const pMatches = Object.entries(POTTALI_PREP_DATA).map(([k, v]) => ({
+            id: k,
+            data: v,
+            score: scoreText(k + ' ' + v.title + ' ' + v.type + ' ' + (v.ingredients || []).join(' '), tokens)
+          })).sort((a, b) => b.score - a.score);
+          const best = pMatches[0];
+          if (best && best.score > 4) {
+            blocks.push({
+              title: `${best.data.title} — Pottali Prep SOP`,
+              badge: best.data.type,
+              points: [
+                `Batch: ${best.data.batch}`,
+                `Key Ingredients: ${(best.data.ingredients || []).slice(0, 2).join('; ')}`,
+                `Heating & Rotation: ${best.data.temp || 'Check on dorsum of hand before skin contact; rotate 4 boluses.'}`
+              ]
+            });
+            actions.push({ label: `Open ${best.data.title} SOP`, type: 'upakarma', arg: best.id });
+          }
+          actions.push({ label: 'Open Full Pottali Master Guide', type: 'pottaliMaster' });
+        }
+
+        // 4. Check Snehapana / Koshtha intent
+        if (/(snehapana|koshtha|mridu|madhyama|krura|ghee|ghrita|snigdha)/.test(qLower)) {
+          const isKrura = qLower.includes('krura');
+          const isMridu = qLower.includes('mridu');
+          const doseGuide = isKrura
+            ? 'Krura Koshtha (Hard bowel): Typically 7 days Abhyantara Snehapana (e.g., 30 → 60 → 100 → 150 → 200 → 250 → 300 mL Arohana Krama) until Samyak Snigdha Lakshana appear.'
+            : isMridu
+            ? 'Mridu Koshtha (Soft bowel): Typically 3 days Snehapana (e.g., 30 → 60 → 100 mL) to avoid premature purgation.'
+            : 'Madhyama Koshtha (Moderate bowel): Typically 5 days Arohana Snehapana (e.g., 30 → 60 → 100 → 150 → 200 mL) after 3–5 days Deepana-Pachana.';
+          blocks.push({
+            title: 'Abhyantara Snehapana & Koshtha Dosing',
+            badge: 'Purvakarma Protocol',
+            points: [
+              doseGuide,
+              'Always confirm Nirama state (clear tongue, good appetite) before starting Sneha.',
+              'Stop immediately once Samyak Snigdha Lakshana (soft unctuous stool, aversion to ghee, glowing skin, light abdomen) appear.'
+            ]
+          });
+          actions.push({ label: 'Open Snehapana Protocol & 7-Day Tracker', type: 'process', arg: ['purva', 'snehapana'] });
+        }
+
+        // 5. Check Samsarjana Krama intent
+        if (/(samsarjana|peya|vilepi|yusha|mamsarasa|shuddhi|diet|khana)/.test(qLower)) {
+          const isMadhyama = qLower.includes('madhyama');
+          const isAvara = qLower.includes('avara');
+          const days = isAvara ? '3 Days (1 Annakala each: Peya → Vilepi → Akrita/Krita Yusha)' : isMadhyama ? '5 Days (2 Annakalas each: Peya → Vilepi → Yusha → Normal light diet)' : '7 Days (3 Annakalas each for Pravara Shuddhi: Peya → Vilepi → Akrita Yusha → Krita Yusha → Normal diet)';
+          blocks.push({
+            title: 'Samsarjana Krama (Post-Shodhana Diet Gradation)',
+            badge: 'Paschatkarma',
+            points: [
+              `Schedule: ${days}.`,
+              'Rebuilds Mandagni (post-cleansing digestive fire) progressively from warm thin rice water (Peya) to thick gruel (Vilepi) and spiced lentil/meat soups.',
+              'Avoid cold drinks, heavy fried foods, curd, daytime sleep, and strenuous exercise throughout Parihara Kala.'
+            ]
+          });
+          actions.push({ label: 'Open Samsarjana & Printable A4 Handout', type: 'samsarjana', arg: 'planner' });
+        }
+
+        // 6. Search Kerala Upakarma (all 15 therapies)
+        const upMatches = UPAKARMA_DATA.map(u => ({
+          item: u,
+          score: scoreText(`${u.name} ${u.malayalam} ${(u.dosha || []).join(' ')} ${u.summary} ${(u.indications || []).join(' ')} ${(u.materials || []).join(' ')}`, tokens)
+        })).filter(m => m.score >= 6).sort((a, b) => b.score - a.score);
+
+        upMatches.slice(0, 2).forEach(m => {
+          const u = m.item;
+          if (!blocks.some(b => b.title.includes(u.name))) {
+            blocks.push({
+              title: u.name,
+              badge: `Kerala Upakarma • ${(u.dosha || []).join('/')}`,
+              points: [
+                u.summary,
+                `Duration: ${u.session} | Course: ${u.course}`,
+                `Key Indications: ${(u.indications || []).slice(0, 4).join(', ')}`
+              ]
+            });
+            actions.push({ label: `Open ${u.name.split('(')[0].trim()}`, type: 'upakarma', arg: u.id });
+          }
+        });
+
+        // 7. Search Core Process (Purva / Pradhana / Paschat)
+        const procMatches = [];
+        ['purva', 'pradhana', 'paschat'].forEach(phase => {
+          (PROCESS_DATA[phase] || []).forEach(p => {
+            const sc = scoreText(`${p.name} ${p.sanskrit} ${p.dosha} ${p.objective} ${(p.indications || []).join(' ')} ${(p.steps || []).join(' ')}`, tokens);
+            if (sc >= 8) procMatches.push({ phase, item: p, score: sc });
+          });
+        });
+        procMatches.sort((a, b) => b.score - a.score);
+        procMatches.slice(0, 2).forEach(m => {
+          const p = m.item;
+          if (!blocks.some(b => b.title.toLowerCase().includes(p.name.toLowerCase()))) {
+            blocks.push({
+              title: `${p.name} (${m.phase.toUpperCase()})`,
+              badge: `${p.dosha} • ${p.duration}`,
+              points: [
+                p.objective,
+                p.indications ? `Indications: ${p.indications.slice(0, 3).join(', ')}` : ''
+              ].filter(Boolean)
+            });
+            actions.push({ label: `Open ${p.name}`, type: 'process', arg: [m.phase, p.id] });
+          }
+        });
+
+        // 8. Search Vyapad & Formulary if still light or directly relevant
+        if (/(vyapad|complication|emergency|adhmana|parikartika|jeevadana|bleed|faint)/.test(qLower)) {
+          const vHits = VYAPAD_LIST.filter(v => scoreText(v.name + ' ' + v.desc, tokens) >= 4).slice(0, 4);
+          const list = vHits.length ? vHits : VYAPAD_LIST.slice(0, 4);
+          blocks.push({
+            title: 'Vyapad (Complication) Recognition',
+            badge: 'Clinical Safety',
+            points: list.map(v => `${v.name}: ${v.desc}`)
+          });
+          actions.push({ label: 'Open Vyapad Emergency Guide', type: 'safety', arg: 'vyapad' });
+        }
+
+        const drugMatches = FORMULARY_DATA.map(d => ({
+          item: d,
+          score: scoreText(`${d.name} ${d.category} ${d.ingredients} ${d.role} ${d.caution}`, tokens)
+        })).filter(m => m.score >= 10).sort((a, b) => b.score - a.score);
+        if (drugMatches.length && blocks.length < 3) {
+          const d = drugMatches[0].item;
+          blocks.push({
+            title: `${d.name} (${d.form})`,
+            badge: `Formulary • ${d.category}`,
+            points: [
+              `Role: ${d.role}`,
+              `Key Ingredients: ${d.ingredients}`,
+              `Caution: ${d.caution}`
+            ]
+          });
+          actions.push({ label: `Open ${d.name}`, type: 'formulary', arg: d.name });
+        }
+
+        // Deduplicate actions
+        const uniqueActions = [];
+        const seenAct = new Set();
+        actions.forEach(a => {
+          if (!seenAct.has(a.label)) {
+            seenAct.add(a.label);
+            uniqueActions.push(a);
+          }
+        });
+
+        return { blocks: blocks.slice(0, 3), safetyBanner, actions: uniqueActions.slice(0, 4) };
+      }
+
+      function executeCopilotAction(type, arg) {
+        if (type === 'upakarma') {
+          switchTab('upakarma');
+          openUpakarmaReader(arg);
+        } else if (type === 'pottaliMaster') {
+          switchTab('upakarma');
+          state.pottaliGuideOpen = true;
+          state.upakarmaReaderOpen = false;
+          renderUpakarmaView();
+          scrollToViewTop('view-upakarma');
+        } else if (type === 'process') {
+          switchTab('process');
+          openProcedureReader(arg[0], arg[1]);
+        } else if (type === 'safety') {
+          switchTab('safety');
+          openSafetyPage(arg);
+        } else if (type === 'samsarjana') {
+          switchTab('samsarjana');
+          openSamPage(arg);
+        } else if (type === 'formulary') {
+          switchTab('formulary');
+          openFormularyReader(arg);
+        } else if (type === 'yoga') {
+          switchTab('yoga');
+          openYogaReader(arg);
+        } else if (type === 'consult') {
+          openConsultModal();
+        }
+      }
+
+      function appendCopilotMessage(role, htmlContent) {
+        const container = document.getElementById('copilotMessages');
+        const wrap = document.createElement('div');
+        wrap.className = role === 'user' ? 'flex justify-end' : 'flex justify-start';
+        if (role === 'user') {
+          wrap.innerHTML = `<div class="max-w-[85%] rounded-2xl rounded-br-sm bg-forest-700 text-white px-4 py-2.5 text-xs sm:text-sm font-medium shadow-sm">${escHtml(htmlContent)}</div>`;
+        } else {
+          wrap.innerHTML = `<div class="max-w-[95%] sm:max-w-[88%] rounded-2xl rounded-bl-sm bg-white border border-sand p-4 shadow-sm text-xs sm:text-sm text-slate-800 space-y-3">${htmlContent}</div>`;
+        }
+        container.appendChild(wrap);
+        container.scrollTop = container.scrollHeight;
+        lucide.createIcons();
+      }
+
+      function handleCopilotSubmit(query) {
+        const q = (query || '').trim();
+        if (!q) return;
+        appendCopilotMessage('user', q);
+        const res = runOfflineCopilotQuery(q);
+        let out = '';
+
+        if (res.safetyBanner) {
+          out += `<div class="rounded-xl bg-rose-50 border border-rose-200 p-3 space-y-1.5">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-800 flex items-center gap-1.5">
+              <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Safety Alert: ${escHtml(res.safetyBanner.risks.join(', '))}
+            </div>
+            <div class="text-xs text-rose-900"><strong>Avoid / Contraindicated:</strong> ${escHtml(res.safetyBanner.blocked.join(', ') || 'See Safety Matrix')}</div>
+            <div class="text-xs text-emerald-900"><strong>Generally Safer Options (Physician-guided):</strong> ${escHtml(res.safetyBanner.safe.join(', ') || 'Gentle palliative care only')}</div>
+          </div>`;
+        }
+
+        if (res.blocks.length === 0 && !res.safetyBanner) {
+          out += `<p class="text-slate-700">I didn't find an exact keyword match for <strong>"${escHtml(q)}"</strong> in the local SOP database. Try naming a therapy (e.g., <em>Elakizhi, Pizhichil, Netra Tarpana, Vamana, Virechana, Snehapana</em>), a condition (<em>knee pain, insomnia, psoriasis, sinus</em>), or switch to the <strong>Case Builder</strong> tab above for a structured recommendation.</p>`;
+        } else {
+          res.blocks.forEach(b => {
+            out += `<div class="rounded-xl bg-parchment/70 border border-sand p-3 space-y-1.5">
+              <div class="flex items-center justify-between flex-wrap gap-1.5">
+                <span class="font-bold text-forest-900 text-xs sm:text-sm">${escHtml(b.title)}</span>
+                <span class="px-2 py-0.5 rounded-full bg-forest-100 text-forest-800 text-[10px] font-bold">${escHtml(b.badge)}</span>
+              </div>
+              <ul class="list-disc pl-4 space-y-1 text-xs text-slate-700">
+                ${b.points.map(pt => `<li>${escHtml(pt)}</li>`).join('')}
+              </ul>
+              ${b.note ? `<div class="text-[11px] text-amber-900 bg-amber-50 border border-amber-200 rounded-lg px-2.5 py-1.5 mt-1">${escHtml(b.note)}</div>` : ''}
+            </div>`;
+          });
+        }
+
+        if (res.actions.length > 0) {
+          const btns = res.actions.map((a, idx) => {
+            const payload = escHtml(JSON.stringify(a));
+            return `<button type="button" data-copilot-act="${payload}" class="copilot-act-btn px-3 py-1.5 rounded-lg bg-forest-700 hover:bg-forest-800 text-white text-[11px] font-bold transition inline-flex items-center gap-1">${escHtml(a.label)} &rarr;</button>`;
+          }).join('');
+          out += `<div class="flex flex-wrap gap-1.5 pt-1">${btns}</div>`;
+        }
+
+        appendCopilotMessage('ai', out);
+      }
+
+      function renderCaseBuilderPlan() {
+        const dosha = document.getElementById('intakeDosha').value;
+        const agni = document.getElementById('intakeAgni').value;
+        const koshtha = document.getElementById('intakeKoshtha').value;
+        const focusArr = Array.from(copilotSelectedFocus);
+        const riskArr = Array.from(copilotSelectedRisks);
+
+        // 1. Purvakarma & Snehapana logic
+        const deepanaNote = (agni === 'manda' || agni === 'vishama')
+          ? 'Mandatory 3–5 days Deepana-Pachana (e.g., Trikatu / Hingwashtaka / Panchakola) until Nirama signs appear before Snehapana.'
+          : '1–3 days mild Deepana-Pachana (avoid Tikshna/pungent drugs if high Pitta or hyperacidity).';
+        const snehaDays = koshtha === 'mridu' ? '3 Days (30 → 60 → 100 mL)' : koshtha === 'krura' ? '7 Days (30 → 60 → 100 → 150 → 200 → 250 → 300 mL)' : '5 Days (30 → 60 → 100 → 150 → 200 mL)';
+
+        // 2. Primary Shodhana candidate by Dosha
+        const shodhanaMap = {
+          vata: { name: 'Basti (Karma / Kala / Yoga Basti)', safetyKey: 'Basti', proc: ['pradhana', 'basti'], why: 'Ardha Chikitsa for Vata; restores colon-level Vata balance and nourishes Asthi-Majja dhatu.' },
+          pitta: { name: 'Virechana (Therapeutic Purgation)', safetyKey: 'Virechana', proc: ['pradhana', 'virechana'], why: 'Prime Shodhana for Pitta, liver/gut heat, and inflammatory skin/metabolic states.' },
+          kapha: { name: 'Vamana (Therapeutic Emesis)', safetyKey: 'Vamana', proc: ['pradhana', 'vamana'], why: 'Definitive elimination of deep-seated Kapha and Amashaya congestion.' },
+          vatakapha: { name: 'Virechana or Yoga Basti (after Rukshana)', safetyKey: 'Basti', proc: ['pradhana', 'basti'], why: 'Clears Avarana/stiffness first (Rukshana), then pacifies Vata with medicated Basti.' },
+          tridosha: { name: 'Mridu Virechana + Rasayana Upakarma', safetyKey: 'Virechana', proc: ['pradhana', 'virechana'], why: 'Gentle systemic cleansing followed by nourishing Kerala Rasayana therapies.' }
+        };
+        const primaryShodhana = shodhanaMap[dosha];
+
+        // Check if primary Shodhana is contraindicated by selected risks
+        const safetyMatchShodhana = SAFETY_THERAPIES.find(t => t.name.toLowerCase().includes(primaryShodhana.safetyKey.toLowerCase()));
+        const shodhanaBlocked = safetyMatchShodhana && safetyMatchShodhana.contra.some(c => riskArr.includes(c));
+
+        // 3. Score Kerala Upakarma therapies by Focus + Dosha, then filter via SAFETY_THERAPIES
+        const focusKeywords = {
+          joints: ['elakizhi', 'podikizhi', 'jambeera', 'pizhichil', 'janu_basti', 'kati_basti', 'kaadi_kizhi', 'dhanyamla_dhara'],
+          stress: ['shirodhara', 'takradhara', 'pizhichil', 'navarakizhi', 'shirobasti'],
+          skin: ['takradhara', 'dhanyamla_dhara', 'udwartana'],
+          ent: ['shirodhara', 'shirobasti', 'jambeera'],
+          eye: ['netra_tarpana', 'shirodhara', 'takradhara'],
+          metabolic: ['udwartana', 'podikizhi', 'dhanyamla_dhara', 'kaadi_kizhi'],
+          rejuv: ['pizhichil', 'navarakizhi', 'mutta_kizhi', 'shirodhara']
+        };
+        const preferredIds = new Set();
+        focusArr.forEach(f => (focusKeywords[f] || []).forEach(id => preferredIds.add(id)));
+
+        const safeRecs = [];
+        const blockedRecs = [];
+
+        UPAKARMA_DATA.forEach(u => {
+          let sc = preferredIds.has(u.id) ? 10 : 0;
+          const dStr = (u.dosha || []).join(' ').toLowerCase();
+          if (dosha === 'vata' && dStr.includes('vata')) sc += 5;
+          if (dosha === 'pitta' && dStr.includes('pitta')) sc += 5;
+          if (dosha === 'kapha' && dStr.includes('kapha')) sc += 5;
+          if (dosha === 'vatakapha' && (dStr.includes('vata') || dStr.includes('kapha'))) sc += 5;
+          if (dosha === 'tridosha') sc += 3;
+          if (sc < 8) return;
+
+          const sEntry = SAFETY_THERAPIES.find(t => t.name.toLowerCase().includes(u.name.split('(')[0].trim().toLowerCase()) || u.name.toLowerCase().includes(t.name.split('(')[0].trim().toLowerCase()));
+          const isContra = sEntry && sEntry.contra.some(c => riskArr.includes(c));
+          const isCaution = sEntry && sEntry.caution.some(c => riskArr.includes(c));
+          if (isContra) {
+            blockedRecs.push({ item: u, reason: sEntry.baseNote });
+          } else {
+            safeRecs.push({ item: u, score: sc, caution: isCaution ? sEntry.baseNote : '' });
+          }
+        });
+        safeRecs.sort((a, b) => b.score - a.score);
+        const topSafe = safeRecs.slice(0, 4);
+
+        const riskLabels = RISK_FACTORS.filter(r => riskArr.includes(r.id)).map(r => r.label);
+        const mailSummary = encodeURIComponent(
+          `Panchakarma Pro - Case Consultation Summary\n\n` +
+          `Dosha: ${dosha.toUpperCase()} | Agni: ${agni} | Koshtha: ${koshtha}\n` +
+          `Focus: ${focusArr.join(', ') || 'General'}\n` +
+          `Red Flags: ${riskLabels.join(', ') || 'None selected'}\n` +
+          `Draft Upakarma Options: ${topSafe.map(x => x.item.name).join(', ') || 'Physician review needed'}\n\n` +
+          `Please advise on a personalized Panchakarma plan.`
+        );
+
+        const card = document.getElementById('intakeResultCard');
+        card.classList.remove('hidden');
+        card.innerHTML = `
+          <div class="flex items-start justify-between flex-wrap gap-3 border-b border-sand pb-3">
+            <div>
+              <span class="px-2.5 py-0.5 rounded-full bg-forest-100 text-forest-800 text-[10px] font-bold uppercase tracking-wider">Offline Clinical Synthesis</span>
+              <h4 class="font-display text-xl font-bold text-forest-900 mt-1">Draft Safety-Screened Panchakarma Plan</h4>
+            </div>
+            <a href="mailto:dr.lateefpapa@gmail.com?subject=Panchakarma%20Pro%20Case%20Review&body=${mailSummary}"
+               class="px-3.5 py-2 rounded-xl bg-turmeric-600 hover:bg-turmeric-700 text-white text-xs font-bold shadow-sm transition inline-flex items-center gap-1.5">
+              <i data-lucide="mail" class="w-3.5 h-3.5"></i> Email Plan to Dr. Lateef
+            </a>
+          </div>
+
+          ${riskLabels.length ? `
+          <div class="rounded-xl bg-rose-50 border border-rose-200 p-3.5 text-xs text-rose-900 space-y-1">
+            <div class="font-bold text-rose-800 flex items-center gap-1.5"><i data-lucide="shield-alert" class="w-4 h-4"></i> Active Red Flags Detected (${riskLabels.length})</div>
+            <div>${escHtml(riskLabels.join(' • '))}</div>
+            ${shodhanaBlocked ? `<div class="font-bold mt-1">Primary Shodhana (${escHtml(primaryShodhana.name)}) is CONTRAINDICATED with these red flags. Defer intensive Shodhana and use gentle physician-supervised Shamana only.</div>` : ''}
+          </div>` : ''}
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="rounded-xl bg-parchment/80 border border-sand p-4 space-y-2">
+              <div class="text-[11px] font-bold uppercase tracking-wider text-forest-800">Stage 1 &amp; 2: Purvakarma &amp; Shodhana</div>
+              <ul class="list-disc pl-4 space-y-1.5 text-xs text-slate-700">
+                <li><strong>Deepana-Pachana:</strong> ${escHtml(deepanaNote)}</li>
+                <li><strong>Snehapana Estimate:</strong> ${escHtml(snehaDays)} (track daily with the 7-Day Snehapana Tracker).</li>
+                <li><strong>Primary Shodhana:</strong> ${shodhanaBlocked ? '<span class="text-rose-700 font-bold">Deferred due to Red Flag</span>' : `<strong>${escHtml(primaryShodhana.name)}</strong> — ${escHtml(primaryShodhana.why)}`}</li>
+              </ul>
+              ${!shodhanaBlocked ? `<button type="button" data-copilot-act='${escHtml(JSON.stringify({ type: 'process', arg: primaryShodhana.proc }))}' class="copilot-act-btn mt-1 px-3 py-1.5 rounded-lg bg-forest-700 hover:bg-forest-800 text-white text-[11px] font-bold">Open ${escHtml(primaryShodhana.name.split('(')[0].trim())} SOP &rarr;</button>` : ''}
+            </div>
+
+            <div class="rounded-xl bg-parchment/80 border border-sand p-4 space-y-2">
+              <div class="text-[11px] font-bold uppercase tracking-wider text-forest-800">Stage 3: Paschatkarma &amp; Recovery</div>
+              <ul class="list-disc pl-4 space-y-1.5 text-xs text-slate-700">
+                <li><strong>Samsarjana Krama:</strong> Match diet gradation to Shuddhi grade (Pravara 7d / Madhyama 5d / Avara 3d).</li>
+                <li><strong>Parihara Kala:</strong> Observe rest &amp; lifestyle precautions for twice the therapy duration.</li>
+                <li><strong>Yoga &amp; Recovery:</strong> Restorative Pranayama only during active Shodhana; gradual Asana return in Paschatkarma.</li>
+              </ul>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <button type="button" data-copilot-act='${escHtml(JSON.stringify({ type: 'samsarjana', arg: 'planner' }))}' class="copilot-act-btn px-3 py-1.5 rounded-lg bg-forest-700 hover:bg-forest-800 text-white text-[11px] font-bold">Samsarjana A4 Handout &rarr;</button>
+                <button type="button" data-copilot-act='${escHtml(JSON.stringify({ type: 'yoga', arg: 'paschat' }))}' class="copilot-act-btn px-3 py-1.5 rounded-lg bg-white border border-sand hover:bg-forest-50 text-forest-800 text-[11px] font-bold">Recovery Yoga &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-forest-800">Recommended Kerala Upakarma Therapies (${topSafe.length} Screened Safe)</div>
+            ${topSafe.length ? `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              ${topSafe.map(x => `
+                <div class="rounded-xl border border-sand bg-white p-3.5 space-y-1.5">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-bold text-xs sm:text-sm text-forest-900">${escHtml(x.item.name)}</span>
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-bold">${escHtml(x.item.course)}</span>
+                  </div>
+                  <p class="text-[11px] text-slate-600">${escHtml(x.item.summary)}</p>
+                  ${x.caution ? `<div class="text-[10px] text-amber-900 bg-amber-50 border border-amber-200 rounded px-2 py-1"><strong>Caution:</strong> ${escHtml(x.caution)}</div>` : ''}
+                  <button type="button" data-copilot-act='${escHtml(JSON.stringify({ type: 'upakarma', arg: x.item.id }))}' class="copilot-act-btn text-[11px] font-bold text-forest-700 hover:underline">Open Full Therapy &amp; Pottali SOP &rarr;</button>
+                </div>
+              `).join('')}
+            </div>` : `<div class="text-xs text-slate-600 bg-parchment rounded-xl p-3">Selected red flags restrict most active Kerala Upakarma procedures. Please consult a physician directly before initiating external heat or oleation therapies.</div>`}
+          </div>
+
+          ${blockedRecs.length ? `
+          <div class="rounded-xl bg-rose-50/70 border border-rose-200 p-3.5 space-y-1">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-800">Auto-Blocked Therapies (Unsafe for Selected Red Flags)</div>
+            <div class="text-xs text-rose-900">${escHtml(blockedRecs.map(b => b.item.name).join(' • '))}</div>
+          </div>` : ''}
+        `;
+        lucide.createIcons();
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      function renderCopilotView() {
+        if (!copilotInitialized) {
+          copilotInitialized = true;
+          // Populate welcome message
+          appendCopilotMessage('ai', `
+            <div class="flex items-center gap-2 font-bold text-forest-900 text-xs sm:text-sm">
+              <i data-lucide="bot" class="w-4 h-4 text-forest-700"></i> Namaste! I'm your Offline Panchakarma Pro Clinical Copilot.
+            </div>
+            <p class="text-xs text-slate-700">Ask me anything about <strong>Purvakarma, Pradhanakarma, 15 Kerala Upakarma therapies, Pottali preparation SOPs, Snehapana dosing, Samsarjana diet, or 20-therapy contraindications</strong> — or tap a quick query above.</p>
+          `);
+
+          // Populate Red-Flag checkboxes from RISK_FACTORS
+          const riskGrid = document.getElementById('intakeRiskGrid');
+          riskGrid.innerHTML = RISK_FACTORS.map(rf => `
+            <label class="flex items-start gap-2 p-2.5 rounded-xl bg-parchment/70 border border-sand hover:border-rose-300 cursor-pointer text-xs">
+              <input type="checkbox" value="${escHtml(rf.id)}" class="intake-risk-cb mt-0.5 rounded border-slate-300 text-rose-600 focus:ring-rose-500" />
+              <span class="leading-snug"><strong class="text-slate-800 block">${escHtml(rf.label)}</strong><span class="text-[10px] text-slate-500">${escHtml(rf.tag)}</span></span>
+            </label>
+          `).join('');
+
+          riskGrid.querySelectorAll('.intake-risk-cb').forEach(cb => {
+            cb.addEventListener('change', () => {
+              if (cb.checked) copilotSelectedRisks.add(cb.value);
+              else copilotSelectedRisks.delete(cb.value);
+            });
+          });
+
+          // Focus chips default active styling
+          document.querySelectorAll('.intake-focus-btn').forEach(btn => {
+            const f = btn.dataset.focus;
+            const syncBtn = () => {
+              const active = copilotSelectedFocus.has(f);
+              btn.classList.toggle('bg-forest-700', active);
+              btn.classList.toggle('text-white', active);
+              btn.classList.toggle('border-forest-700', active);
+              btn.classList.toggle('bg-parchment', !active);
+              btn.classList.toggle('text-slate-700', !active);
+            };
+            syncBtn();
+            btn.addEventListener('click', () => {
+              if (copilotSelectedFocus.has(f)) copilotSelectedFocus.delete(f);
+              else copilotSelectedFocus.add(f);
+              syncBtn();
+            });
+          });
+
+          // Mode toggle
+          const chatBtn = document.getElementById('copilotModeChatBtn');
+          const intakeBtn = document.getElementById('copilotModeIntakeBtn');
+          const chatPanel = document.getElementById('copilotChatPanel');
+          const intakePanel = document.getElementById('copilotIntakePanel');
+
+          function setCopilotMode(mode) {
+            const isChat = mode === 'chat';
+            chatPanel.classList.toggle('hidden', !isChat);
+            intakePanel.classList.toggle('hidden', isChat);
+            chatBtn.className = isChat
+              ? 'px-3.5 py-2 rounded-lg text-xs font-bold bg-amber-400 text-forest-950 shadow-sm transition flex items-center gap-1.5'
+              : 'px-3.5 py-2 rounded-lg text-xs font-bold text-emerald-100 hover:text-white transition flex items-center gap-1.5';
+            intakeBtn.className = !isChat
+              ? 'px-3.5 py-2 rounded-lg text-xs font-bold bg-amber-400 text-forest-950 shadow-sm transition flex items-center gap-1.5'
+              : 'px-3.5 py-2 rounded-lg text-xs font-bold text-emerald-100 hover:text-white transition flex items-center gap-1.5';
+          }
+          chatBtn.addEventListener('click', () => setCopilotMode('chat'));
+          intakeBtn.addEventListener('click', () => setCopilotMode('intake'));
+
+          // Quick prompt chips
+          document.querySelectorAll('[data-copilot-q]').forEach(chip => {
+            chip.addEventListener('click', () => handleCopilotSubmit(chip.dataset.copilotQ));
+          });
+
+          // Chat form submit
+          document.getElementById('copilotChatForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const inp = document.getElementById('copilotInput');
+            const val = inp.value;
+            inp.value = '';
+            handleCopilotSubmit(val);
+          });
+
+          // Clear chat
+          document.getElementById('copilotClearChatBtn').addEventListener('click', () => {
+            document.getElementById('copilotMessages').innerHTML = '';
+            appendCopilotMessage('ai', `<p class="text-xs text-slate-700">Chat cleared. Tap any quick query above or ask a new clinical question.</p>`);
+          });
+
+          // Case builder generate & reset
+          document.getElementById('generateCasePlanBtn').addEventListener('click', renderCaseBuilderPlan);
+          document.getElementById('intakeResetBtn').addEventListener('click', () => {
+            copilotSelectedRisks.clear();
+            copilotSelectedFocus.clear();
+            copilotSelectedFocus.add('joints');
+            document.querySelectorAll('.intake-risk-cb').forEach(cb => { cb.checked = false; });
+            document.querySelectorAll('.intake-focus-btn').forEach(btn => {
+              const active = copilotSelectedFocus.has(btn.dataset.focus);
+              btn.classList.toggle('bg-forest-700', active);
+              btn.classList.toggle('text-white', active);
+              btn.classList.toggle('border-forest-700', active);
+              btn.classList.toggle('bg-parchment', !active);
+              btn.classList.toggle('text-slate-700', !active);
+            });
+            document.getElementById('intakeResultCard').classList.add('hidden');
+          });
+
+          // Delegated click for deep-link action buttons inside Copilot answers & plans
+          document.getElementById('view-copilot').addEventListener('click', e => {
+            const btn = e.target.closest('.copilot-act-btn');
+            if (!btn) return;
+            try {
+              const payload = JSON.parse(btn.getAttribute('data-copilot-act'));
+              executeCopilotAction(payload.type, payload.arg);
+            } catch (_) {}
+          });
+        }
+        lucide.createIcons();
+      }
+
+      document.getElementById('floatingCopilotBtn').addEventListener('click', () => {
+        switchTab('copilot');
+        scrollToViewTop('view-copilot');
+      });
+      document.getElementById('coverCopilotBtn').addEventListener('click', () => {
+        switchTab('copilot');
+        scrollToViewTop('view-copilot');
+      });
+
       // Initial render
       renderProcessView();
       renderKoshthaPlanner();
@@ -4153,9 +4952,7 @@
   </script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
-      });
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
     }
   </script>
 </body>

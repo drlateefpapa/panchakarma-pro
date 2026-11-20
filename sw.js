@@ -1,4 +1,4 @@
-const CACHE_NAME = 'panchakarma-pro-mobile-v2';
+const CACHE_NAME = 'panchakarma-pro-mobile-v3';
 const PRECACHE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './cover.jpg', './img_02.jpg', './img_03.jpg', './img_04.jpg', './img_05.jpg', './img_06.jpg', './img_07.jpg', './img_08.jpg', './img_09.jpg', './img_10.jpg', './img_11.jpg'];
 
 self.addEventListener('install', event => {

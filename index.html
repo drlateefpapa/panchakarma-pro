@@ -3389,7 +3389,7 @@
         state.yogaReaderOpen = false;
         renderYogaView();
       } else if (tabId === 'copilot') {
-        renderCopilotView();
+        if (typeof window.renderCopilotView === 'function') window.renderCopilotView();
       }
       const fab = document.getElementById('floatingCopilotBtn');
       if (fab) fab.classList.toggle('hidden', tabId === 'copilot');
@@ -4620,7 +4620,7 @@
         }
         container.appendChild(wrap);
         container.scrollTop = container.scrollHeight;
-        lucide.createIcons();
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
       }
 
       function handleCopilotSubmit(query) {
@@ -4813,7 +4813,7 @@
             <div class="text-xs text-rose-900">${escHtml(blockedRecs.map(b => b.item.name).join(' • '))}</div>
           </div>` : ''}
         `;
-        lucide.createIcons();
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
         card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
 
@@ -4931,8 +4931,10 @@
             } catch (_) {}
           });
         }
-        lucide.createIcons();
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
       }
+
+      window.renderCopilotView = renderCopilotView;
 
       document.getElementById('floatingCopilotBtn').addEventListener('click', () => {
         switchTab('copilot');
@@ -4947,13 +4949,10 @@
       renderProcessView();
       renderKoshthaPlanner();
       initDurationChart();
-      lucide.createIcons();
+      renderCopilotView();
+      if (window.lucide && lucide.createIcons) lucide.createIcons();
     });
   </script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
-    }
-  </script>
+  <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}</script>
 </body>
 </html>
